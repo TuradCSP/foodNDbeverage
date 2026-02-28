@@ -1,0 +1,609 @@
+[Uploading foodndbeverage.html…]()
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food & Beverage Production Portal | Turad Ahamed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c5a059;
+            --dark: #1a1a1a;
+            --light: #f4f7f6;
+            --accent: #e67e22;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: var(--light); color: var(--dark); line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
+        
+        /* Ensure all future images scale down properly on mobile */
+        img { max-width: 100%; height: auto; display: block; margin: 10px auto; border-radius: 8px; }
+        
+        .profile-header {
+            background: var(--dark);
+            padding: 10px 5%;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #333;
+            flex-wrap: wrap; /* Allows wrapping on very tiny screens */
+        }
+        .profile-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://lh3.googleusercontent.com/u/0/d/1QrrQs4ZPNfK4PG9BaZuwlybtJ3LmyNi1');
+            background-size: cover; 
+            background-position: center;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            color: white;
+            border-bottom: 8px solid var(--gold);
+            padding: 0 20px;
+        }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 10px; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; color: var(--gold); font-weight: 600; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
+
+        nav { background: var(--dark); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .nav-logo { color: var(--gold); font-weight: 800; font-size: 1.4rem; text-decoration: none; white-space: nowrap; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; white-space: nowrap; }
+        .nav-links a:hover { color: var(--gold); }
+
+        section { padding: 60px 5%; max-width: 1200px; margin: 0 auto; }
+        h2 { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 40px; position: relative; line-height: 1.3; }
+        h2::after { content: ''; width: 80px; height: 4px; background: var(--gold); position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); }
+
+        /* Accordion Styles for Theory Section */
+        details { background: white; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); overflow: hidden; border-left: 5px solid var(--gold); }
+        summary { padding: 15px 20px; font-weight: 600; font-size: 1.1rem; cursor: pointer; background: #fff; color: var(--dark); list-style: none; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; word-break: break-word; }
+        summary:hover { background: #f9f9f9; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 1.5rem; color: var(--gold); font-weight: bold; flex-shrink: 0; margin-left: 10px; }
+        details[open] summary::after { content: '-'; }
+        details[open] summary { border-bottom: 1px solid #eee; }
+        .details-content { padding: 20px; font-size: 0.95rem; }
+        
+        .details-content h4 { color: var(--accent); margin-top: 25px; margin-bottom: 10px; font-size: 1.15rem; border-bottom: 1px dashed #ddd; padding-bottom: 5px;}
+        .details-content ul, .details-content ol { margin-left: 20px; margin-bottom: 15px; }
+        .details-content li { margin-bottom: 4px; }
+        .details-content p { margin-bottom: 10px; }
+
+        /* Q&A Box Styling */
+        .qa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        .qa-box { background: #fbfbfb; padding: 15px; border-left: 4px solid var(--accent); border-radius: 0 5px 5px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .qa-q { font-weight: 700; color: var(--dark); margin-bottom: 6px; font-size: 0.95rem; }
+        .qa-a { font-size: 0.9rem; color: #444; }
+
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center; border-bottom: 4px solid var(--gold); }
+        
+        .content-box { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .job-title { color: var(--accent); font-weight: 700; margin: 15px 0; }
+        
+        .student-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .student-item { background: #fff; padding: 12px; border-radius: 8px; border-left: 4px solid var(--gold); font-weight: 600; font-size: 0.9rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.3s; }
+        .student-item:hover { background: var(--gold); color: white; transform: translateX(5px); }
+
+        .board-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 15px 0; }
+        .board-box { padding: 15px; border-radius: 8px; color: white; font-weight: bold; text-align: center; font-size: 0.85rem; }
+        
+        .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 0.85rem; background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 15px;}
+        .data-item { border-bottom: 1px solid #eee; padding-bottom: 5px; }
+
+        footer { background: var(--dark); color: white; text-align: center; padding: 40px 20px; font-size: 0.9rem; }
+        .highlight-text { color: var(--gold); font-weight: bold; }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) { 
+            .hero h1 { font-size: 2.2rem; } 
+            .hero p { font-size: 1rem; }
+            section { padding: 40px 15px; } /* Less padding on sides for smaller screens */
+            h2 { font-size: 1.8rem; margin-bottom: 30px; }
+            
+            /* Make Nav links touch-friendly and wrapped on mobile */
+            nav { flex-direction: column; align-items: center; gap: 15px; padding: 15px; }
+            .nav-links { width: 100%; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .nav-links a { padding: 6px 12px; background: rgba(255,255,255,0.05); border-radius: 4px; font-size: 0.85rem;}
+
+            /* Force grids into 1 column to prevent squishing */
+            .qa-grid { grid-template-columns: 1fr; }
+            .card-grid { grid-template-columns: 1fr; }
+            .data-grid { grid-template-columns: 1fr; padding: 10px; }
+            .board-grid { grid-template-columns: repeat(2, 1fr); } /* Keep 2 columns for boards to save space */
+            .student-grid { grid-template-columns: 1fr; }
+
+            /* Maximize reading room in boxes */
+            .content-box { padding: 15px; }
+            .details-content { padding: 15px; }
+            .details-content ul, .details-content ol { margin-left: 15px; }
+            summary { padding: 12px 15px; font-size: 1rem; }
+            
+            /* Activity box adjustment */
+            div[style*="background:#fffaf0"] { padding: 15px !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="profile-header">
+    <img src="https://lh6.googleusercontent.com/xWwlMrh_2pS2Z-7ZJ_vTn63ZXJ9UATNZKKBK3d4dsDGM1qUWnRc8_eZp929Nt2x75cUAzkZCflsTlEk1GRLLwOdpSEbrcN11I1abFfoZwZsm5W7EaKEHImwRElnePayQiVLyY7iQ" alt="Turad" class="profile-img">
+    <span style="color:white; font-size: 0.8rem;">Logged in as <b style="color:var(--gold);">Turad Ahamed</b></span>
+</div>
+
+<nav>
+    <a href="#" class="nav-logo">TURAD AHAMED</a>
+    <div class="nav-links">
+        <a href="#theory">Theory</a>
+        <a href="#competencies">Competencies</a>
+        <a href="#jobsheet">Job Sheet</a>
+        <a href="#trainers">Trainers</a>
+        <a href="#students">Students</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div>
+        <h1>FOOD & BEVERAGE PRODUCTION</h1>
+        <p>UCEP-SICIP Documentation Portal</p>
+    </div>
+</section>
+
+<section id="theory">
+    <h2>Course Theory (তত্ত্বীয় অংশ)</h2>
+    
+    <details>
+        <summary>1. Basics: Hygiene, Safety & HACCP</summary>
+        <div class="details-content">
+            <h4>Hand Washing Steps (হাত ধোয়ার ধাপসমূহ)</h4>
+            <ol>
+                <li><strong>Wet hands:</strong> Use running water to wet your hands.</li>
+                <li><strong>Apply soap:</strong> Use approved hand-washing soap.</li>
+                <li><strong>Scrub:</strong> Vigorously scrub hands and arms for at least 20 seconds.</li>
+                <li><strong>Clean details:</strong> Clean under fingernails and between fingers.</li>
+                <li><strong>Rinse:</strong> Rinse thoroughly under running water.</li>
+                <li><strong>Dry and Turn off:</strong> Dry hands with a tissue and turn off the tap.</li>
+            </ol>
+
+            <h4>Hygiene & Cleanliness</h4>
+            <ul>
+                <li><strong>Personal Hygiene:</strong> Personal grooming standards practiced in line with workplace health and safety requirements.</li>
+                <li><strong>Workplace Hygiene:</strong> Preventing hygiene risks. The workplace area must be maintained in a clean and tidy order to meet standards. Facilities must be clean and maintained.</li>
+                <li><strong>Food Hygiene:</strong> Food safety procedures.</li>
+                <li><strong>Main reason for kitchen cleaning:</strong> To avoid cross-contamination and maintain hygiene.</li>
+            </ul>
+
+            <h4>Kitchen Safety (OHS) & Protocol</h4>
+            <ul>
+                <li><strong>OHS (Occupational Health & Safety):</strong> Important in the hospitality industry to ensure workplace safety, reduce hazards and accidents, and ensure the safety of the receiver.</li>
+                <li><strong>PPE (Personal Protective Equipment):</strong> Important for kitchen staff to avoid cross-contamination and maintain hygiene and cleanliness. Includes: Chef Hat (prevents hair falling), Face Mask (prevents respiratory droplets), Apron (protects from heat/spills), Gloves (ensures safe handling), Safety Shoes (non-slip).</li>
+                <li><strong>Movement Compliance:</strong> Ensures food safety and safe food handling. You must walk cautiously; running to save time is not a good practice.</li>
+                <li><strong>Health Conditions:</strong> Should be reported daily (or as required by the program), and necessary measures taken.</li>
+                <li><strong>Who to talk to for safety concerns:</strong> Head Chef, Executive Chef, Kitchen Supervisor.</li>
+                <li><strong>Defective Equipment:</strong> Must be separated and accordingly informed to the authority.</li>
+                <li><strong>Delivery of Raw Materials:</strong> Check specification, order sheet, and regularly check the validity dates of materials.</li>
+            </ul> 
+
+            <h4>What is HAZARD and types of HAZARD?</h4>
+
+            <p><strong>Hazard</strong> is an unwanted threat to our health and property.</p>
+
+<p>There are 4 main types of hazards:</p>
+
+<ul>
+  <li><strong>Physical Hazards:</strong> These are environmental factors that can cause harm without necessarily touching you. 
+      <em>Example:</em> High noise, radiation, extreme temperature, or slippery floors.</li>
+  
+  <li><strong>Chemical Hazards:</strong> These occur when a person is exposed to any chemical preparation in the workplace in any form. 
+      <em>Example:</em> Cleaning products, pesticides, gases, or flammable liquids.</li>
+  
+  <li><strong>Biological Hazards:</strong> These come from working with people, animals, or infectious plant materials. 
+      <em>Example:</em> Viruses, bacteria, mold, or insect bites.</li>
+  
+  <li><strong>Ergonomic Hazards:</strong> These occur when the type of work, body positions, and working conditions put a strain on your body. 
+      <em>Example:</em> Poor workstation setup, heavy lifting, or repetitive movements.</li>
+</ul>
+
+            
+
+            <h4>HACCP Principles</h4>
+            <p><strong>Stands for:</strong> Hazard Analysis and Critical Control Point</p>
+            <ol>
+                <li>Conduct a HAZARD analysis.</li>
+                <li>Identify the critical control point.</li>
+                <li>Establish critical line (limit).</li>
+                <li>Monitor critical control point.</li>
+                <li>Establish corrective actions.</li>
+                <li>Verification.</li>
+                <li>Keeping records.</li>
+            </ol>
+            <p><em>Note: An SOP (Standard Operating Procedure) is essential for establishing a monitoring system in HACCP.</em></p>
+
+            <h4>Important Terms & Documents</h4>
+            <ul>
+                <li><strong>CBLM:</strong> Competency Based Learning Material.</li>
+                <li><strong>SOP:</strong> Standard Operating Procedure / Protocol.</li>
+                <li><strong>KOT/COT:</strong> Kitchen Order Ticket.</li>
+                <li><strong>FIFO / LIFO:</strong> First in First out / Last in First out.</li>
+                <li><strong>Mis-en-place:</strong> Preparation in advance.</li>
+                <li><strong>Cross Contamination:</strong> Transferring bacteria from one place to another.</li>
+                <li><strong>Work-documents:</strong> Email, Memo, Letter, SOP, KOT.</li>
+            </ul>
+        </div>
+    </details>
+
+    <details>
+        <summary>2. Vegetables, Herbs & Spices</summary>
+        <div class="details-content">
+            <h4>Classification of Vegetables</h4>
+            <ul>
+                <li><strong>Root:</strong> Carrot, Radish, Beetroot, Sweet potato.</li>
+                <li><strong>Bulb:</strong> Onion, Garlic, Leek.</li>
+                <li><strong>Flower:</strong> Broccoli, Cauliflower.</li>
+                <li><strong>Fruit:</strong> Tomato, Lady finger, Cucumber.</li>
+                <li><strong>Seed:</strong> Beans, Peas.</li>
+                <li><strong>Gourd:</strong> Bottle gourd, Bitter gourd.</li>
+                <li><strong>Tuber:</strong> Potato, Yam, Taro.</li>
+            </ul>
+
+            
+
+[Image of different vegetable cuts]
+
+
+            <h4>Vegetable Cutting Names</h4>
+            <ol>
+                <li><strong>Julienne:</strong> Results in thin match-stick size. Dimensions: 2-3 inches long, 1/16 to 1/8 inches wide.</li>
+                <li><strong>Jardiniere</strong></li>
+                <li><strong>Macedoine</strong></li>
+                <li><strong>Brunoise:</strong> Small dice.</li>
+                <li><strong>Paysanne</strong></li>
+                <li><strong>Mirepoix</strong></li>
+                <li><strong>Rough-cut</strong></li>
+                <li><strong>Wedges cut</strong></li>
+            </ol>
+
+            <h4>Herbs & Spices</h4>
+            <p><strong>Definition:</strong> One of the many aromatic substances derived from plants that have a sharp flavour and are used to prepare savory dishes.</p>
+            <ul>
+                <li><strong>Aromatic Herbs:</strong> Basil, Rosemary, Lavender, Oregano, Thyme, Parsley.</li>
+                <li><strong>5 Common Spices:</strong> Black Pepper, Cinnamon, Cumin, Turmeric, Cardamom.</li>
+                <li><strong>Indian Spice Characteristic:</strong> Turmeric and cumin are characteristic for their yellow color.</li>
+            </ul>
+        </div>
+    </details>
+
+    <details>
+        <summary>3. Stocks, Soups & Sauces</summary>
+        <div class="details-content">
+            <h4>Stocks</h4>
+            <p>A flavourful liquid agent which is made from meat/meat-bones and fish/fish-bones with aromatic vegetables, and bouquet garni (মসলার পোটলা) with spices.</p>
+            <ul>
+                <li><strong>Types:</strong> White Stock, Brown Stock, Fish Stock, Vegetable Stock.</li>
+                <li><strong>Methods:</strong> Boiling (100°C) or Simmering/Semaring (80°C - 98°C).</li>
+                <li><strong>Why does stock become cloudy?</strong> Quickly boiling or boiling too slowly.</li>
+            </ul>
+
+            <h4>Soups</h4>
+            <p>A liquid dish typically savoury and made by boiling meat, fish or vegetables.</p>
+            <ul>
+                <li><strong>3 Parts of Soup:</strong> 
+                    1. Stock (Base) <br>
+                    2. Seasoning (Salt, Pepper) <br>
+                    3. Garnishing (Croutons/Deep Fried Bread dice, Serials/Fries/Pans, Cheese/Parsley, Meat/Poultry, Cream, Seafoods/Pasta/Vegetables).
+                </li>
+                <li><strong>Types of Soup:</strong> 
+                    1. Cold soup (Gazpacho) <br>
+                    2. International (Oxtail, French onion soup) <br>
+                    3. Thin soup (Consomme or clear, and Broth) <br>
+                    4. Thick soup (Cream, puree).
+                </li>
+            </ul>
+
+            <h4>5 Mother Sauces</h4>
+            <p>These serve as the starting point for many other sauces:</p>
+            <ul>
+                <li><strong>Bechamel:</strong> Also known as White Sauce.</li>
+                <li><strong>Espagnole:</strong> Known as Brown Sauce.</li>
+                <li><strong>Veloute:</strong> A savory sauce made from a roux and a light stock.</li>
+                <li><strong>Concassee:</strong> Specifically listed as Tomato Sauce.</li>
+                <li><strong>Hollandaise:</strong> An emulsion of egg yolk, melted butter, and an acid.</li>
+            </ul>
+            
+            <h4>Thickening Agents</h4>
+            <ul>
+                <li><strong>Roux:</strong> A combination of flour and butter cooked together. Types: White, brown, blond.</li>
+                <li>Corn flour, Rice flour, Potato starch, Egg yolk.</li>
+            </ul>
+        </div>
+    </details>
+
+    <details>
+        <summary>4. Salads, Meats, Fish & Bakery</summary>
+        <div class="details-content">
+            <h4>Salads</h4>
+            <p>A cold food which is made from raw and cooked vegetables or fruit, always served with dressing.</p>
+            <ul>
+                <li><strong>4 Parts of Salad:</strong> Base (Lettuce leaf), Body (Cutting), Dressing (Consistency, colour, taste, and ingredients - mayo, sauce, potato), Garnishing (Olive oil, lemon, for decoration and taste).</li>
+                <li><strong>Classification:</strong> 1. Simple salad (Continental, area-wise) 2. Mixed salad (Fusion/Flusion) 3. Composed salad.</li>
+                <li><strong>Dressing:</strong> A seasoned liquid or semi-liquid that adds to the body of the salad to give flavour, taste, and color increase.</li>
+                <li><strong>Russian Salad:</strong> Traditionally made of boiling potato, carrot, green peas, eggs, onions, & apples.</li>
+            </ul>
+
+            <h4>Fish, Shell-fish & Meat</h4>
+            <ul>
+                <li><strong>Fish Classification:</strong> Round fish, Flat fish.</li>
+                <li><strong>Shell-fish Classification:</strong> Crustaceans (Shrimp, Lobster, Prawns), Molluscs (Oyster, Mussels, Scallops).</li>
+                <li><strong>Seafood Examples:</strong> Squid, octopus.</li>
+                <li><strong>Meat Context:</strong> In general kitchen context, "meat" often refers to red meat like Mutton.</li>
+                <li><strong>Egg Cooking Methods:</strong> Suitable cooking methods for eggs include Boiling and Poaching.</li>
+            </ul>
+
+            <h4>Bakery Style & Pastry</h4>
+            <ul>
+                <li><strong>Stages of each dough & Baking:</strong> Scaling → Mixing → Fermentation (35° Temp, 92% humidity, 25-30 mins) → Make-up → Proofing (Same as fermentation conditions) → Baking → Finishing → Packaging.</li>
+                <li><strong>Trivia:</strong> The muffin originated in France.</li>
+                <li><strong>Puff Pastry:</strong> The primary leavening agent used in puff pastry is Butter.</li>
+            </ul>
+        </div>
+    </details>
+
+    <details>
+        <summary>5. Kitchen Organization, Equipment & Temps</summary>
+        <div class="details-content">
+            
+            
+
+            <h4>Chef Brigade</h4>
+            <ul>
+                <li><strong>Executive Chef:</strong> Top responsible person in the kitchen.</li>
+                <li><strong>Sous Chef</strong></li>
+                <li><strong>Chef-de-parties</strong></li>
+                <li><strong>Demi-chef</strong></li>
+                <li><strong>Saucier Chef:</strong> Sauce chef</li>
+                <li><strong>Entremetier Chef:</strong> Vegetable chef</li>
+                <li><strong>Patissier Chef:</strong> Pastry chef</li>
+                <li><strong>Rotisseur Chef:</strong> Roasting chef</li>
+                <li><strong>Poissonnier Chef:</strong> Fish chef</li>
+                <li><strong>Boucher Chef:</strong> Butcher chef</li>
+                <li><strong>Commis:</strong> Level 1, 2, 3</li>
+            </ul>
+
+            
+
+[Image of parts of a chef knife diagram]
+
+
+            <h4>Knives & Pans</h4>
+            <ul>
+                <li><strong>Types of Knives:</strong> Chef knife (8-10 Inch long), Utility knife, Paring knife, Boning knife (separating meat from bone), Bread knife, Serrated knife, Meat cleaver, Carving knife.</li>
+                <li><strong>Parts of Knives:</strong> Spine (top, blunt edge), Tip (pointed end), Handle (part you hold), Heels (back part of blade edge, near handle), Edge (sharp, cutting part).</li>
+                <li><strong>Carrying Rule:</strong> In a busy kitchen, the knife should be carried downwards.</li>
+                <li><strong>Cooking Pans:</strong> Sauce pan, Frying pan, Grilling pan, Roasting pan, Braising pan.</li>
+            </ul>
+
+            <h4>Cooking & Storage Temperatures</h4>
+            <div class="data-grid">
+                <div class="data-item"><strong>Chiller / Chillerant:</strong> 1°C to 4°C</div>
+                <div class="data-item"><strong>Freezer:</strong> -18°C to -24°C</div>
+                <div class="data-item"><strong>Boiling:</strong> 100°C</div>
+                <div class="data-item"><strong>Cooking:</strong> 75°C</div>
+                <div class="data-item"><strong>Re-heating:</strong> 75°C to 82°C</div>
+                <div class="data-item"><strong>Simmering:</strong> 80°C to 98°C</div>
+                <div class="data-item"><strong>Danger-zone:</strong> 5°C to 63°C</div>
+                <div class="data-item"><strong>Yogurt Making:</strong> 37°C to 40°C</div>
+                <div class="data-item"><strong>Room Temp:</strong> 37°C</div>
+                <div class="data-item"><strong>Serving Temp:</strong> 63°C to 67°C</div>
+                <div class="data-item"><strong>Dry-Storage:</strong> 10°C to 15°C</div>
+                <div class="data-item"><strong>Deep-Fry:</strong> 160°C to 180°C</div>
+                <div class="data-item"><strong>Vegetable Storage:</strong> 4°C to 10°C</div>
+                <div class="data-item"><strong>Cold Storage:</strong> 10°C</div>
+            </div>
+
+            <h4>Storage Times</h4>
+            <p>Food and vegetables are stored at 4°C - 10°C. Fish Stock limit is 20 minutes.</p>
+
+            <h4>Tools & Equipment</h4>
+            <p><strong>Electric/Automatic Machines (যে মেশিনগুলো নিজে নিজে অপারেট হতে পারে এবং ইলেকট্রিক বিদ্যুতের সাহায্যে চলে):</strong> Blender, Meat mincer, Potato peeler (automatic), Air fryer, Oven, Steamer, Deep fryer, Chiller, Freezer, Meat mixer, Grinder.</p>
+            <p><strong>Manual Kitchen Tools:</strong> Spatula, Knife sharpener, Knife sharpening stone, Grater, Strainer, Spoon, Chopping board, Chef knife, Peeler, Meat hammer, Can opener, Fork, Whisk (used for making mayonnaise).</p>
+            <p><strong>Utensils Rule:</strong> The utensils need to be put in the designated place after cleaning.</p>
+
+            <h4>Chopping Boards</h4>
+            <p><em>Must be washed, rinsed, and sanitized to prevent cross-contamination.</em></p>
+            <div class="board-grid">
+                <div class="board-box" style="background:#e74c3c;">Red = Raw Red Meat</div>
+                <div class="board-box" style="background:#3498db;">Blue = Raw Seafood</div>
+                <div class="board-box" style="background:#f1c40f; color:black;">Yellow = Raw Poultry</div>
+                <div class="board-box" style="background:#2ecc71;">Green = Veg & Fruit</div>
+                <div class="board-box" style="background:#8b4513;">Brown = Cooked Meat</div>
+                <div class="board-box" style="background:#ecf0f1; color:black; border:1px solid #ddd;">White = Dairy</div>
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>6. Dining, Tourism & Cuisine</summary>
+        <div class="details-content">
+            <h4>Dining & Fast Food</h4>
+            <p>All-day dining food / Fast Food includes: Fried Chicken, Pizza, Steak, Soup, Pasta, French fries.</p>
+
+            <h4>Tourism & Management</h4>
+            <p><strong>2 Types of Tourism:</strong> 1. Domestic tourism 2. International tourism.</p>
+            <p><strong>Hotel Manager Responsibilities:</strong> Ensuring best staff management, ensuring smooth operation, and providing the best service to the customers.</p>
+            
+            <h4>Cuisine Characteristics</h4>
+            <ul>
+                <li><strong>Bangladeshi Cuisine:</strong> Primary characteristic is the use of mustard oil.</li>
+                <li><strong>Describing Cuisines:</strong> We describe Asian, Indian, and Bangladeshi cuisines by their ingredients, cooking methods, and traditions.</li>
+            </ul>
+        </div>
+    </details>
+
+    <details>
+        <summary>7. Comprehensive Exam Q&A Library</summary>
+        <div class="details-content" style="background: #fff; padding: 15px;">
+            <p style="margin-bottom: 20px; color: #666; font-style: italic;">A complete repository of specific exam questions, general knowledge, and operational protocols.</p>
+            
+            <div class="qa-grid">
+                <div class="qa-box">
+                    <div class="qa-q">Q: What should employees do to clarify a task?</div>
+                    <div class="qa-a">A: Discuss with supervision.</div>
+                </div>
+                <div class="qa-box">
+                    <div class="qa-q">Q: How can employees confirm work requirements with colleagues?</div>
+                    <div class="qa-a">A: Through regular meetings.</div>
+                </div>
+                <div class="qa-box">
+                    <div class="qa-q">Q: The most significant organizational benefit of requirement confirmation is:</div>
+                    <div class="qa-a">A: Preventing costly rework through early alignment.</div>
+                </div>
+                <div class="qa-box">
+                    <div class="qa-q">Q: What practice ensures safe food handling?</div>
+                    <div class="qa-a">A: Safe food handling practices in line with sanitation regulations and the food safety code.</div>
+                </div>
+                <div class="qa-box">
+                    <div class="qa-q">Q: How do you identify food handling requirements?</div>
+                    <div class="qa-a">A: According to the food safety code and workplace sanitation maintain rules.</div>
+                </div>
+                <div class="qa-box">
+                    <div class="qa-q">Q: What are the immediate negative effects on customers resulting from poor communication?</div>
+                    <div class="qa-a">A: You will lose customer satisfaction.</div>
+                </div>
+                <div class="qa-box">
+                    <div class="qa-q">Q: Why is it important to evaluate the flavor, cost, color, and consistency of food?</div>
+                    <div class="qa-a">A: It ensures food quality, and makes the food attractive and appealing.</div>
+                </div>
+                <div class="qa-box">
+                    <div class="qa-q">Q: How are desserts reconstituted before serving?</div>
+                    <div class="qa-a">A: The temperature should be cold and maintain the natural temperature and garnishing.</div>
+                </div>
+                <div class="qa-box">
+                    <div class="qa-q">Q: What is the main ingredient of fruit-custards?</div>
+                    <div class="qa-a">A: Custard powder.</div>
+                </div>
+                <div class="qa-box">
+                    <div class="qa-q">Q: What should be ensured during sealing and molding?</div>
+                    <div class="qa-a">A: As per requirement.</div>
+                </div>
+                <div class="qa-box">
+                    <div class="qa-q">Q: What is the most effective method for establishing common goals within a food and beverage production team?</div>
+                    <div class="qa-a">A: Holding a team meeting to discuss and agree upon shared goals.</div>
+                </div>
+                <div class="qa-box">
+                    <div class="qa-q">Q: Which of the following is an effective method for operating a salon profitably?</div>
+                    <div class="qa-a">A: Maintaining a consistent marketing strategy.</div>
+                </div>
+            </div>
+        </div>
+    </details>
+</section>
+
+<section id="competencies" style="background:var(--dark); color:white;">
+    <h2 style="color:white;">Unit of Competencies</h2>
+    <div class="card-grid" style="text-align: left;">
+        <div class="content-box" style="background: #2a2a2a; color: white;">
+            <h4 style="color: var(--gold); margin-bottom: 10px;">Generic Competencies</h4>
+            <ul style="margin-left: 20px; font-size: 0.9rem;">
+                <li>Apply OSH Practices</li>
+                <li>Respond to Instructions</li>
+                <li>Work in a team</li>
+            </ul>
+        </div>
+        <div class="content-box" style="background: #2a2a2a; color: white;">
+            <h4 style="color: var(--gold); margin-bottom: 10px;">Sector Competencies</h4>
+            <ul style="margin-left: 20px; font-size: 0.9rem;">
+                <li>Work in Tourism/Hospitality</li>
+                <li>Follow Hygiene Procedure</li>
+                <li>Provide Guest Service</li>
+            </ul>
+        </div>
+        <div class="content-box" style="background: #2a2a2a; color: white;">
+            <h4 style="color: var(--gold); margin-bottom: 10px;">Core Competencies</h4>
+            <ul style="margin-left: 20px; font-size: 0.9rem;">
+                <li>Apply Food Safety</li>
+                <li>Organize/Prepare for Cooking</li>
+                <li>Prepare Stocks, Soups, Sauces</li>
+                <li>Prepare Veg, Salads, Eggs</li>
+                <li>Prepare Meat, Poultry, Fish</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="jobsheet">
+    <h2>JOB SHEET</h2>
+    <div class="content-box">
+        <div style="border-bottom: 2px solid #eee; margin-bottom: 20px; padding-bottom: 10px;">
+            <h3>Food & Beverage Production (Cooking)</h3>
+            <p><strong>Assessment Event-2:</strong> Demonstration (4 hours)</p>
+        </div>
+        
+        <h4 class="job-title">Perform Food and Beverage Production</h4>
+        <p>The candidate should prepare and cook the following recipes for the exam:</p>
+        <ul style="margin: 10px 0 20px 30px;">
+            <li>Poached Egg-4</li>
+            <li>Pot Roast chicken (Roasting, Braising, Stewing)</li>
+            <li>Baked Jacket Potato-6</li>
+            <li>Fried Prawn-3</li>
+            <li>Steamed Hilsa Fish Served with boiled rice-2</li>
+            <li>Grilled Tomato-5</li>
+        </ul>
+
+        <div style="background:#fffaf0; padding:20px; border-radius:10px; border:1px solid var(--gold);">
+            <h4 style="margin-bottom: 10px;">Activity-1: Prepare Poached Egg</h4>
+            <ul style="margin-left: 20px; font-size: 0.95rem;">
+                <li>Egg - 02 (ডিম - ০২টি)</li>
+                <li>Water - ½ liter (পানি - ১/২ লিটার)</li>
+                <li>Vinegar - ½ Tea Spoon (ভিনেগার - ১/২ চা চামচ)</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="trainers" style="background:#f1f1f1;">
+    <h2>Our Honorable Trainers</h2>
+    <div class="card-grid">
+        <div class="card"><h3>Shorifa Yeasmin </h3><p>Trainer, F&B Production</p></div>
+        <div class="card"><h3>Nishat Sultana Akhi</h3><p>Trainer, F&B Production</p></div>
+        <div class="card"><h3>Tanjimul Islam Titu</h3><p>Trainer, F&B Production</p></div>
+    </div>
+</section>
+
+<section id="students">
+    <h2>Batch Students (1-25)</h2>
+    <div class="student-grid" id="student-container"></div>
+</section>
+
+<footer>
+    <p>© 2026 Developed by <span class="highlight-text">TURAD AHAMED</span></p>
+    <p>UCEP-SICIP Food & Beverage Production Project</p>
+</footer>
+
+<script>
+    const students = [
+        "Md. Turad Ahamed", "Md Rejual Islam", "Daud Hosen Rezol", "SAIFUL ISLAM APU",
+        "Md Irfan Samid", "Adiba Tasnim Mohona", "Kazi Nayem", "Sami Al Jaber Aronno",
+        "Md. Umer Faruk Sifatullah", "Raihan Talukdar", "ISRAT JAHAN", "Sharif Mahamod",
+        "NUSRAT JAHAN", "Yeasmin Akter Mimi", "SAJIA AFRIN", "Muhammed Ibrahim",
+        "JABER HASAN SHOURAV", "MORIUM AKTER", "Uching Mong Marma", "MD. RAFIU",
+        "Nipa Akter", "Yamin Hossain Rana", "JIHAD SARDER", "ENAM AHMED CHOWDHURY", "RUQAIYA MALIHA"
+    ];
+
+    const container = document.getElementById('student-container');
+    students.forEach((name, index) => {
+        container.innerHTML += `<div class="student-item">${index + 1}. ${name}</div>`;
+    });
+</script>
+
+</body>
+</html>
